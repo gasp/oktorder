@@ -1,8 +1,8 @@
 {
-  "name": "oktorderapp",
+  "name": "oktorder",
   "version": "0.0.1",
   "private": true,
-  "description": "oktorderapp created by Rekit.",
+  "description": "oktober created by Rekit.",
   "keywords": [
     "rekit"
   ],
