@@ -18,20 +18,13 @@ export class Home extends Component {
   }
 
   renderProductsPrime() {
-    return _.map(this.props.menu.products, ({ value: { _id, name, price, stock } }) => {
-      const availabiltyClass = stock > 10 ? '' : 'danger';
-      const v = {
-        key: _id,
-        name,
-        price,
-        stock
-      };
-      return (
-        <li key={_id} className={availabiltyClass}>
-          {name}, {price / 100} € (stock: {stock})
-          <ProductButton {...v} />
-        </li>
-      );
+    return _.map(this.props.menu.products, ({ value }) => {
+      const v = value;
+      // eslint-disable-next-line
+      v.key = value['_id'];
+      // v.add = this.props.someAction: add
+      // v.rem = this.props.someAction: rem
+      return <ProductButton {...v} />;
     });
   }
 
