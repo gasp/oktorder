@@ -3,6 +3,7 @@
 
 import {
   Home,
+  Category,
 } from './';
 
 export default {
@@ -10,5 +11,6 @@ export default {
   name: 'Menu',
   childRoutes: [
     { path: 'home', name: 'Home', component: Home },
+    { path: 'category/:cat', name: 'Category', component: Category },
   ],
 };

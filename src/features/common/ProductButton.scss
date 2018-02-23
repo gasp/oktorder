@@ -1,0 +1,38 @@
+@import '../../styles/mixins';
+
+.product-button {
+  margin: .5em;
+  background-color: #eee;
+  display: flex;
+  justify-content: space-between;
+  width: 340px;
+  .details {
+    flex-grow: 1;
+    background-color: #b5d4d6;
+    .name {
+      width: 80%;
+    }
+    .price {
+      width: 10%;
+    }
+  }
+  .order {
+    background-color: pink;
+    display: flex;
+    // height: 100%;
+    button, span {
+      transition: 1s;
+    }
+    button {
+      border-radius: 50%;
+      width: 3em;
+      height: 3em;
+    }
+    .qty {
+      display: block;
+      text-align: center;
+      width: 3em;
+    }
+  }
+
+}
