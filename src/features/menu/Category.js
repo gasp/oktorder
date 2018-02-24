@@ -3,8 +3,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from './redux/actions';
+import { List, ListItem } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import Button from 'material-ui/FlatButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
 import ProductButton from '../common/ProductButton';
+import * as actions from './redux/actions';
 
 export class Category extends Component {
   static propTypes = {
@@ -40,15 +45,24 @@ export class Category extends Component {
       // v.rem = this.props.someAction: rem
       v.add = () => (null);
       v.rem = () => (null);
-      return <ProductButton {...v} key={key} />;
+      // return <ProductButton {...v} key={key} />;
+      return (
+        <ListItem
+          key={key}
+          leftAvatar={<Avatar icon={<ContentAdd />} />}
+          primaryText={v.name}
+          secondaryText={`0 × ${v.price / 100} €`}
+          rightIconButton={<Button icon={<ContentAdd />} />}
+        />
+      );
     });
   }
 
   render() {
     return (
-      <div className="menu-category">
+      <List>
         {this.renderProducts()}
-      </div>
+      </List>
     );
   }
 }

@@ -1,46 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProductButton = ({ name, price, add, rem, qty, stock }) => {
+const ProductButton = ({ add, rem, qty, stock }) => {
   if (stock < 1) {
-    return (
-      <div className="product-button depleted">
-        <div className="name">{name} (depleted)</div>
-      </div>
-    );
+    return <div>(depleted)</div>;
   }
 
   function order(qty) {
     if (qty < 1) {
-      return (
-        <div className="order">
-          <button onClick={add}>+</button>
-        </div>
-      );
+      return <button onClick={add}>+</button>;
     }
     return (
-      <div className="order">
+      <span>
         <button disabled={qty < 1} onClick={rem}>-</button>
         <span className="qty">{qty}</span>
         <button onClick={add}>+</button>
-      </div>
+      </span>
     );
   }
 
   return (
-    <div className="product-button">
-      <div className="details">
-        <div className="name">{name}</div>
-        <div className="price">{price / 100}&nbsp;€</div>
-      </div>
+    <span className="order-button">
       {order(qty)}
-    </div>
+    </span>
   );
 };
 
 ProductButton.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
   qty: PropTypes.number,
   stock: PropTypes.number,
   add: PropTypes.func.isRequired,
