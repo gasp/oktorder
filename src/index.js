@@ -4,6 +4,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { render } from 'react-dom';
 import configStore from './common/configStore';
 import routeConfig from './common/routeConfig';
@@ -14,7 +15,9 @@ const store = configStore();
 function renderApp(app) {
   render(
     <AppContainer>
-      {app}
+      <MuiThemeProvider>
+        {app}
+      </MuiThemeProvider>
     </AppContainer>,
     document.getElementById('react-root')
   );
