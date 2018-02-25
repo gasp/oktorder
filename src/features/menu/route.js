@@ -2,7 +2,7 @@
 // Learn more from: http://rekit.js.org/docs/routing.html
 
 import {
-  Home,
+  Shortcuts,
   Category,
 } from './';
 
@@ -10,7 +10,7 @@ export default {
   path: 'menu',
   name: 'Menu',
   childRoutes: [
-    { path: 'home', name: 'Home', component: Home },
+    { path: '/', name: 'Shortcuts', component: Shortcuts, isIndex: true },
     { path: 'category/:cat', name: 'Category', component: Category },
   ],
 };

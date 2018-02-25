@@ -1,20 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { Home } from 'src/features/menu/Home';
+import { Shortcuts } from 'src/features/menu/Shortcuts';
 
-describe('menu/Home', () => {
+describe('menu/Shortcuts', () => {
   it('renders node with correct class name', () => {
     const props = {
       menu: {},
       actions: {},
     };
     const renderedComponent = shallow(
-      <Home {...props} />
+      <Shortcuts {...props} />
     );
 
     expect(
-      renderedComponent.find('.menu-home').getElement()
+      renderedComponent.find('.menu-shortcuts').getElement()
     ).to.exist;
   });
 });

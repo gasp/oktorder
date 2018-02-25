@@ -12,13 +12,12 @@ import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/FlatButton';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import * as actions from './redux/actions';
 import ProductButton from '../common/ProductButton';
 
 
-export class Home extends Component {
+export class Shortcuts extends Component {
   static propTypes = {
     menu: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
@@ -58,9 +57,7 @@ export class Home extends Component {
 
   render() {
     return (
-      <div className="menu-home">
-        Page Content: menu/MenuHome
-        <button onClick={this.props.actions.fetchProducts}> refresh </button>
+      <div className="menu-shortcuts">
         <List>
           <Subheader inset>Shortcuts</Subheader>
           {this.renderProductsPrime()}
@@ -79,7 +76,6 @@ export class Home extends Component {
             <Link to="/menu/category/drink">Drinks</Link>
           </ListItem>
         </List>
-        <RaisedButton label="Default" />
       </div>
 
     );
@@ -103,4 +99,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(Shortcuts);
