@@ -1,4 +1,15 @@
 @import '../../styles/mixins';
 
 .home-app {
+  height: 100%;
+  .appContent {
+    height: 300px;
+    overflow-y: scroll;
+  }
+
+
+  .page-container {
+    padding: 0;
+    max-width: 600px;
+  }
 }
