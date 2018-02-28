@@ -37,7 +37,7 @@ export default class Navigation extends PureComponent {
   render() {
     return (
       <Paper zDepth={1}>
-        <BottomNavigation selectedIndex={this.state.selectedIndex}>
+        <BottomNavigation selectedIndex={this.state.selectedIndex} style={{ backgroundColor: '#fff' }}>
           {/* icon is a map */}
           <BottomNavigationItem
             label="Tables"

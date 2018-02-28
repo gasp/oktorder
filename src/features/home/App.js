@@ -19,7 +19,7 @@ export default class App extends Component {
     // Navigation is 56px height
     return (
       <div className="home-app">
-        <div className="appContent" style={{ height: `${window.innerHeight - 56}px` }}>
+        <div className="appContent" style={{ height: `${window.innerHeight - 56}px`, backgroundColor: '#f9f9f9' }}>
           {this.props.children}
         </div>
         <Navigation routes={routeConfig} go={this.go} />
