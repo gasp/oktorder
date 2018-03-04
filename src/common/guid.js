@@ -1,0 +1,12 @@
+export default function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  let uid = '';
+  for (let i = 0; i < 8; i += 1) {
+    uid += s4();
+  }
+  return uid;
+}

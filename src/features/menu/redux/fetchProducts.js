@@ -29,7 +29,7 @@ export function fetchProducts(args = {}) {
       // args.error here is only for test coverage purpose.
       // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
       const cat = args.cat || 'prime';
-      axios.get(`${couch.host}${couch.db}/_design/prime/_view/category?key=%22${cat}%22`).then(
+      axios.get(`${couch.product}/_view/category?key=%22${cat}%22`).then(
         (res) => {
           dispatch({
             type: MENU_FETCH_PRODUCTS_SUCCESS,
