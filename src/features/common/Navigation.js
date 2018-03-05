@@ -50,7 +50,7 @@ export default class Navigation extends PureComponent {
             icon={favoritesIcon}
             onClick={() => this.select(1)}
           />
-          {/* icon is un plateau avec des verres */}
+          {/* icon is un plateau avec un verre et une assiette */}
           <BottomNavigationItem
             label="Orders"
             icon={nearbyIcon}
