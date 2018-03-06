@@ -1,33 +1,33 @@
 import React from 'react';
+import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import { Navigation } from 'src/features/common';
 
-describe('components/SimpleNav', () => {
+describe('components/Navigation', () => {
   it('renders node with correct dom structure', () => {
-    const routes = [{
-      childRoutes: [
-        { path: '/', childRoutes: [{ path: 'abc' }] },
-        { path: '/root', autoIndexRoute: true },
-        { path: 'relative-path', name: 'Link Name' },
-        {
-          path: 'sub-links',
-          childRoutes: [
-            { path: 'sub-link' },
-          ],
-        },
-        { path: '*' },
-      ],
-    }];
-    const comp = shallow(
-      <Navigation routes={routes} />
+    const routes = [
+      { path: '/', childRoutes: [{ path: 'abc' }] },
+      { path: '/root', autoIndexRoute: true },
+      { path: 'relative-path', name: 'Link Name' },
+      {
+        path: 'sub-links',
+        childRoutes: [
+          { path: 'sub-link' },
+        ],
+      },
+      { path: '*' },
+    ];
+    const noop = () => undefined;
+    const wrapper = shallow(
+      <Navigation routes={routes} go={noop} />
     );
 
     expect(
-      comp.find('.common-navigation').getElement()
-    ).to.exist;
+      wrapper.find(BottomNavigation)
+    ).to.have.length(1);
     expect(
-      comp.find('li').length
-    ).to.equal(8);
+      wrapper.find(BottomNavigationItem)
+    ).to.have.length(3);
   });
 });
