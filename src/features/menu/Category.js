@@ -8,7 +8,7 @@ import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/FlatButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-import ProductButton from '../common/ProductButton';
+// import ProductButton from '../common/ProductButton';
 import * as actions from './redux/actions';
 
 export class Category extends Component {
@@ -30,17 +30,13 @@ export class Category extends Component {
   }
 
   renderProducts() {
-    const a = this.props.menu.products;
-    console.log(a);
-    const products = _.sortBy(this.props.menu.products, [o => (o.value.name)]);
-
-    return _.map(products, ({ value }) => {
-      if (value.categories && value.categories.indexOf(this.props.match.params.cat) < 0) {
+    const products = _.sortBy(this.props.menu.products, [o => (o.name)]);
+    return _.map(products, (product) => {
+      if (product.categories && product.categories.indexOf(this.props.match.params.cat) < 0) {
+        // ignore products which are not in this category
         return '';
       }
-      const v = value;
-      // eslint-disable-next-line
-      const key = value['_id'];
+      const v = { ...product };
       // v.add = this.props.someAction: add
       // v.rem = this.props.someAction: rem
       v.add = () => (null);
@@ -48,7 +44,7 @@ export class Category extends Component {
       // return <ProductButton {...v} key={key} />;
       return (
         <ListItem
-          key={key}
+          key={v.id}
           leftAvatar={<Avatar icon={<ContentAdd />} />}
           primaryText={v.name}
           secondaryText={`0 × ${v.price / 100} €`}

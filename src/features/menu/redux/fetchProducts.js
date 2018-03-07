@@ -60,6 +60,15 @@ export function dismissFetchProductsError() {
   };
 }
 
+export function formatProduct(rows) {
+  const flattened = rows.map(r => ({ id: r.id, ...r.value }));
+  const mapped = _.mapKeys(flattened, 'id');
+
+  console.log('%c here is the magic', 'color: pink');
+  // console.log(rows, mapped);
+  return mapped;
+}
+
 export function reducer(state, action) {
   switch (action.type) {
     case MENU_FETCH_PRODUCTS_BEGIN:
@@ -78,7 +87,7 @@ export function reducer(state, action) {
         fetchProductsPending: false,
         fetchProductsError: null,
         // products: { ...state.products },
-        products: { ...state.products, ..._.mapKeys(action.data.data.rows, 'id') },
+        products: { ...state.products, ...formatProduct(action.data.data.rows) },
       };
 
     case MENU_FETCH_PRODUCTS_FAILURE:

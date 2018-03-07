@@ -14,7 +14,7 @@ import FileFolder from 'material-ui/svg-icons/file/folder';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import * as actions from './redux/actions';
-import ProductButton from '../common/ProductButton';
+// import ProductButton from '../common/ProductButton';
 
 
 export class Shortcuts extends Component {
@@ -29,23 +29,20 @@ export class Shortcuts extends Component {
   }
 
   renderProductsPrime() {
-    return _.map(this.props.menu.products, ({ value }) => {
-      // filter
-      // console.log(value.name, value.categories, value.categories.indexOf('prime'), value.categories.indexOf('prime') < 0);
-      if (value.categories && value.categories.indexOf('prime') < 0) {
+    return _.map(this.props.menu.products, (product) => {
+      if (product.categories && product.categories.indexOf('prime') < 0) {
+        // ignore products which are not in this category
         return '';
       }
-      const v = value;
-      // eslint-disable-next-line
-      const key = value['_id'];
+      const v = { ...product };
       // v.add = this.props.someAction: add
       // v.rem = this.props.someAction: rem
       v.add = () => (null);
       v.rem = () => (null);
-      // <ProductButton {...v} />
+      // return <ProductButton {...v} key={key} />;
       return (
         <ListItem
-          key={key}
+          key={v.id}
           leftAvatar={<Avatar icon={<ContentAdd />} />}
           primaryText={v.name}
           secondaryText={`0 × ${v.price / 100} €`}

@@ -10,26 +10,22 @@ describe('menu/Category', () => {
       menu: {
         products: {
           id1: {
-            key: 'food',
-            value: {
-              _id: 'id1',
-              categories: ['food', 'beer'],
-              name: 'a product id1',
-              price: 1000,
-              type: 'product',
-              stock: 1000,
-            }
+            id: 'id1',
+            _id: 'id1',
+            categories: ['food', 'beer'],
+            name: 'a product id1',
+            price: 1000,
+            type: 'product',
+            stock: 1000,
           },
           id2: {
-            key: 'food',
-            value: {
-              _id: 'id2',
-              categories: ['food', 'beer'],
-              name: 'a product id2',
-              price: 500,
-              type: 'product',
-              stock: 500,
-            }
+            id: 'id2',
+            _id: 'id2',
+            categories: ['food', 'beer'],
+            name: 'a product id2',
+            price: 500,
+            type: 'product',
+            stock: 500,
           }
         }
       },
