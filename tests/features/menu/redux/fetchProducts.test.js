@@ -68,7 +68,7 @@ describe('menu/redux/fetchProducts', () => {
     const prevState = { fetchProductsPending: true };
     const state = reducer(
       prevState,
-      { type: MENU_FETCH_PRODUCTS_SUCCESS, data: { data: { rows: {} } } }
+      { type: MENU_FETCH_PRODUCTS_SUCCESS, data: {} }
     );
     expect(state).to.not.equal(prevState); // should be immutable
     expect(state.fetchProductsPending).to.be.false;

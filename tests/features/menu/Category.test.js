@@ -12,7 +12,7 @@ describe('menu/Category', () => {
           id1: {
             id: 'id1',
             _id: 'id1',
-            categories: ['food', 'beer'],
+            categories: ['thetestcategory', 'anothercategory'],
             name: 'a product id1',
             price: 1000,
             type: 'product',
@@ -21,8 +21,17 @@ describe('menu/Category', () => {
           id2: {
             id: 'id2',
             _id: 'id2',
-            categories: ['food', 'beer'],
+            categories: ['thetestcategory', 'anothercategory'],
             name: 'a product id2',
+            price: 500,
+            type: 'product',
+            stock: 500,
+          },
+          id3: {
+            id: 'id3',
+            _id: 'id3',
+            categories: ['notthetestcategory', 'anothercategory'],
+            name: 'a product id3',
             price: 500,
             type: 'product',
             stock: 500,
@@ -32,7 +41,7 @@ describe('menu/Category', () => {
       actions: {
         fetchProducts: () => ({}),
       },
-      match: { params: { cat: 'food' } }
+      match: { params: { cat: 'thetestcategory' } }
     };
     const wrapper = shallow(
       <Category {...props} />

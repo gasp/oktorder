@@ -7,7 +7,10 @@ describe('order/Current', () => {
   it('renders node with correct class name', () => {
     const props = {
       order: {},
-      actions: {},
+      actions: {
+        fetchOrders: () => undefined,
+        createOrder: () => undefined, // FIXME this should disappear
+      },
     };
     const renderedComponent = shallow(
       <Current {...props} />

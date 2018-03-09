@@ -68,7 +68,7 @@ describe('order/redux/fetchOrders', () => {
     const prevState = { fetchOrdersPending: true };
     const state = reducer(
       prevState,
-      { type: ORDER_FETCH_ORDERS_SUCCESS, data: {} }
+      { type: ORDER_FETCH_ORDERS_SUCCESS, data: { data: { rows: [] } } }
     );
     expect(state).to.not.equal(prevState); // should be immutable
     expect(state.fetchOrdersPending).to.be.false;
