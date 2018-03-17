@@ -14,10 +14,7 @@ export default class App extends Component {
     children: 'No content.',
   };
 
-  go = url => {
-    console.log(`should navigate to ${url}`); // should be something like this.props.history.push(url)
-    history.push(url);
-  }
+  go = url => history.push(url)
 
   render() {
     // Navigation is 56px height

@@ -31,7 +31,7 @@ export default class Navigation extends PureComponent {
 
   select = (index) => {
     this.setState({ selectedIndex: index });
-    this.props.go(['/', 'menu', 'orders'][index]);
+    this.props.go(['/', '/menu', '/orders'][index]);
   }
 
   render() {
