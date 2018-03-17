@@ -12,12 +12,12 @@ describe('order/Current', () => {
         createOrder: () => undefined, // FIXME this should disappear
       },
     };
-    const renderedComponent = shallow(
+    const wrapper = shallow(
       <Current {...props} />
     );
 
     expect(
-      renderedComponent.find('.order-current').getElement()
+      wrapper.find('.order-current').getElement()
     ).to.exist;
   });
 });
