@@ -17,7 +17,6 @@ export function fetchOrders(args = {}) {
     dispatch({
       type: ORDER_FETCH_ORDERS_BEGIN,
     });
-    console.log(args);
 
     const url = `${couch.order}/_view/my?tag="Nina"`; // FIXME: Nina  + " = %22 ?
     return new Promise((resolve, reject) => {
