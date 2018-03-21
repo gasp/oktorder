@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  paper:
+    container_name: oktober_node
+    build:
+      context: ./container
+      dockerfile: node.docker
+    #restart: unless-stopped
+    ports:
+      - "6075:6075"
+      - "6076:6076"
+    volumes:
+      - "./:/var/app/"
+    command: nodemon app.js
+  couch:
+    container_name: oktober_couch
+    build:
+      context: ./container
+      dockerfile: couch.docker
+    ports:
+      - "5984:5984"

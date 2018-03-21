@@ -1,0 +1,16 @@
+FROM node:8.4
+
+WORKDIR /var/app
+
+SHELL ["/bin/bash", "-c"]
+
+# # libcairo
+# # RUN apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
+# RUN apt-get install -y libcairo2-dev libjpeg-dev g++
+# RUN npm i -g nodemon
+
+ENV NODE_ENV dev
+
+COPY ./node_entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
