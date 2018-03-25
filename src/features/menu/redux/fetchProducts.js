@@ -79,7 +79,7 @@ export function reducer(state, action) {
     case MENU_FETCH_PRODUCTS_SUCCESS:
       // The request is success
       // //, ..._.mapKeys(action.payload.data, 'id') },
-      if (action.data.data && action.data.data.row) {
+      if (action.data.data && action.data.data.rows) {
         return {
           ...state,
           fetchProductsPending: false,

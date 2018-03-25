@@ -12,6 +12,7 @@ describe('components/Order', () => {
       created: 'Thu Mar 15 2018 16:22:21 GMT+0100 (CET)',
       updated: 'Thu Mar 15 2018 16:22:21 GMT+0100 (CET)',
       open: true,
+      paid: false,
       ready: false,
     };
     const wrapper = shallow(
