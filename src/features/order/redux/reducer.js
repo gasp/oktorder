@@ -9,10 +9,12 @@
 import initialState from './initialState';
 import { reducer as fetchOrdersReducer } from './fetchOrders';
 import { reducer as createOrderReducer } from './createOrder';
+import { reducer as fetchOrderReducer } from './fetchOrder';
 
 const reducers = [
   fetchOrdersReducer,
   createOrderReducer,
+  fetchOrderReducer,
 ];
 
 export default function reducer(state = initialState, action) {

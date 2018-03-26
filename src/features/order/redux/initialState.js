@@ -10,6 +10,8 @@ const initialState = {
   fetchOrdersError: null,
   createOrderPending: false,
   createOrderError: null,
+  fetchOrderPending: false,
+  fetchOrderError: null,
 };
 
 export default initialState;

@@ -3,6 +3,7 @@
 
 import {
   Current,
+  Details,
 } from './';
 
 export default {
@@ -10,5 +11,6 @@ export default {
   name: 'Order',
   childRoutes: [
     { path: 'current', name: 'Current', component: Current, isIndex: true },
+    { path: 'details', name: 'Details', component: Details },
   ],
 };

@@ -9,12 +9,12 @@ import Divider from 'material-ui/Divider';
 export default class Order extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    table: PropTypes.string.isRequired, // TODO thiw will be a schema
+    table: PropTypes.string.isRequired, // TODO this will be a schema
     open: PropTypes.bool.isRequired,
     ready: PropTypes.bool.isRequired,
     created: PropTypes.string.isRequired,
     updated: PropTypes.string.isRequired,
-    waiter: PropTypes.string.isRequired, // TODO thiw will be a schema
+    waiter: PropTypes.string.isRequired, // TODO this will be a schema
   };
 
   state = {};
