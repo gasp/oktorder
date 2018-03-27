@@ -62,15 +62,16 @@ export function dismissFetchOrderError() {
 }
 
 export function formatOrder(rows) {
-  console.log(rows)
-  return {};
-
-
-  // select in the rows which is the order
-  const order = rows.filter()
-  // then populate items
-  const flattened = rows.map(r => ({ id: r.id, ...r.value }));
-  const mapped = _.mapKeys(flattened, 'id');
+  // collect all the items which are items
+  const allItems = rows.filter(r => r.value.type === 'orderitem').map(r => ({ id: r.id, ...r.value }));
+  // collect orders
+  const order = rows.filter(r => r.value.type === 'order').map((r) => {
+    // filter all items of this order
+    // remap them as {productid, qty}
+    const items = allItems.filter(it => it.orderid === r.id).map(it => ({ productid: it.productid, qty: it.qty }));
+    return { id: r.id, ...r.value, items };
+  });
+  const mapped = _.mapKeys(order, 'id');
   return mapped;
 }
 
@@ -85,13 +86,12 @@ export function reducer(state, action) {
       };
 
     case ORDER_FETCH_ORDER_SUCCESS:
-      // The request is success
-      console.log(action.data);
+      // The request is successful
       return {
         ...state,
         fetchOrderPending: false,
         fetchOrderError: null,
-        orders: { ...state.orders , ...formatOrder(action.data.data.rows)}
+        orders: { ...state.orders, ...formatOrder(action.data.data.rows) },
       };
 
     case ORDER_FETCH_ORDER_FAILURE:

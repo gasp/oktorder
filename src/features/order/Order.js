@@ -6,6 +6,12 @@ import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 
+const OrderItems = ({ orderid, items }) => (Object.keys(items).map(i => (
+  <ListItem key={`item_${i}${orderid}-${items[i].productid}`}>
+    { items[i].productid } x { items[i].qty }
+  </ListItem>
+)));
+
 export default class Order extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
@@ -15,7 +21,12 @@ export default class Order extends PureComponent {
     created: PropTypes.string.isRequired,
     updated: PropTypes.string.isRequired,
     waiter: PropTypes.string.isRequired, // TODO this will be a schema
+    items: PropTypes.any,
   };
+
+  static defaultProps = {
+    items: {}
+  }
 
   state = {};
 
@@ -35,8 +46,7 @@ export default class Order extends PureComponent {
         <div>waiter: {this.props.waiter}</div>
         <div>ready: {this.props.ready ? 'ready' : 'not ready'}</div>
         <List>
-          <ListItem key="a">some sample &quot;a&quot; order here</ListItem>
-          <ListItem key="b">some sample &quot;b&quot; order here</ListItem>
+          <OrderItems items={this.props.items} orderid={this.props.id} />
         </List>
         <Divider />
       </div>

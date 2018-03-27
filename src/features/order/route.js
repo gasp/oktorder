@@ -11,6 +11,6 @@ export default {
   name: 'Order',
   childRoutes: [
     { path: 'current', name: 'Current', component: Current, isIndex: true },
-    { path: 'details', name: 'Details', component: Details },
+    { path: 'details/:orderId', name: 'Details', component: Details },
   ],
 };

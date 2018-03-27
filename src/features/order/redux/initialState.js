@@ -12,6 +12,7 @@ const initialState = {
   createOrderError: null,
   fetchOrderPending: false,
   fetchOrderError: null,
+  orders: {},
 };
 
 export default initialState;
