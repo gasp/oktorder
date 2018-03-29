@@ -1,5 +1,5 @@
 const NodeCouchDb = require('node-couchdb');
-const productContent = require('./product-db');
+const productContent = require('./fixtures/product');
 
 const dbName = 'oktorder';
 
@@ -12,52 +12,43 @@ const couch = new NodeCouchDb({
 function cleanup() {
   console.log('cleanup');
   // this may be all coped by promise if chainable
-  return new Promise((resolve, reject) => {
-    return couch.listDatabases().then(dbs => {
-      return Promise.all(dbs.map(db => {
-        if(db === dbName) {
-          couch.dropDatabase(dbName).then(() => {
-            console.log(`db: ${dbName} was dropped`);
-            return resolve()
-          }, err => {
-            reject(`db: unable to drop ${dbName}`)
-          });
-        }
-      }));
-      console.log(`no database "${dbName}" to drop`);
-      resolve();
-    }, err => {
-        console.log(err)
-    });
-  });
+  return couch.listDatabases()
+    .then((dbs) => {
+      const theDb = dbs.filter(db => (db === dbName));
+      if (theDb.length !== 1) throw new Error('the db was not found');
+      return theDb;
+    }).then(db => (
+      couch.dropDatabase(db)
+    )).then(() => {
+      console.log(`db: ${dbName} was dropped`);
+      return true;
+    })
+    .catch(err => console.log(err));
 }
+
 function create() {
   console.log('create');
-  return new Promise(function(resolve, reject) {
-    couch.createDatabase(dbName).then(() => {
-      console.log(`${dbName} was recreated`)
-      return resolve();
-    }, err => {
-      reject(`unable to create db ${dbName}`)
-    });
-  })
-}
-function fill() {
-  console.log('fill');
   return new Promise((resolve, reject) => {
-    productContent.map((dish) => {
-      couch.insert(dbName, dish).then(({data, headers, status}) => {
-        // data is json response
-        console.log('ok')
-        console.log(headers, data)
-        // headers is an object with all response headers
-        // status is statusCode number
-      }, err => {
-        console.log('error', err);
-        // ...or err.code=EDOCCONFLICT if document with the same id already exists
-      });
-    })
+    couch.createDatabase(dbName).then(() => {
+      console.log(`${dbName} was recreated`);
+      return resolve();
+    }, err => (
+      reject(new Error(`unable to create db ${dbName}, ${err}`))
+    ));
   });
 }
 
-cleanup().then(create).then(fill).catch(err => console.log('errrror', err))
+async function fill() {
+  const ids = [];
+  for (let i = 0; i < productContent.length; i += 1) {
+    // this loop inserting successfully each element in intentionnal
+    // there is no rush, let's play it gentle with the server and keep order
+    // eslint-disable-next-line no-await-in-loop
+    const response = await couch.insert(dbName, productContent[i]);
+    if (response.data.ok) productContent[i].id = response.data.id;
+    ids.push(response.data.id);
+  }
+  return ids;
+}
+
+cleanup().then(create).then(fill).catch(err => console.log('errrror', err));
