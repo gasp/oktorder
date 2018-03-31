@@ -49,6 +49,7 @@ module.exports = [
     }
   },
   {
+    _id: 'paulaner',
     name: 'Paulaner — Weiß - Maß',
     type: 'product',
     categories: ['prime', 'beer', '1l'],
@@ -56,6 +57,7 @@ module.exports = [
     stock: 100000,
   },
   {
+    _id: 'augustiner',
     name: 'Augustiner — Wiesn Edelstoff - Maß',
     type: 'product',
     categories: ['prime', 'beer', '1l'],
@@ -70,6 +72,7 @@ module.exports = [
     stock: 100000,
   },
   {
+    _id: 'brezel',
     name: 'Brezel',
     type: 'product',
     categories: ['prime', 'snack'],
@@ -78,6 +81,7 @@ module.exports = [
   },
 
   {
+    id: 'jagermeister',
     name: 'Jagermeister - Shot',
     type: 'product',
     categories: ['drink'],

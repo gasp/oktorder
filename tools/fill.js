@@ -1,5 +1,6 @@
 const NodeCouchDb = require('node-couchdb');
 const productContent = require('./fixtures/product');
+const orderContent = require('./fixtures/order');
 
 const dbName = 'oktorder';
 
@@ -38,17 +39,23 @@ function create() {
   });
 }
 
-async function fill() {
+/**
+ * @param {array} content the content to append
+ */
+async function fill(content) {
   const ids = [];
-  for (let i = 0; i < productContent.length; i += 1) {
+  for (let i = 0; i < content.length; i += 1) {
     // this loop inserting successfully each element in intentionnal
     // there is no rush, let's play it gentle with the server and keep order
     // eslint-disable-next-line no-await-in-loop
-    const response = await couch.insert(dbName, productContent[i]);
+    const response = await couch.insert(dbName, content[i]);
     if (response.data.ok) productContent[i].id = response.data.id;
     ids.push(response.data.id);
   }
   return ids;
 }
 
-cleanup().then(create).then(fill).catch(err => console.log('errrror', err));
+cleanup().then(create)
+  .then(() => (fill(productContent)))
+  .then(() => (fill(orderContent)))
+  .catch(err => console.log('errrror', err));
