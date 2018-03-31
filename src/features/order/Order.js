@@ -2,15 +2,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { List, ListItem } from 'material-ui/List';
+import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
-
-const OrderItems = ({ orderid, items }) => (Object.keys(items).map(i => (
-  <ListItem key={`item_${i}${orderid}-${items[i].productid}`}>
-    { items[i].productid } x { items[i].qty }
-  </ListItem>
-)));
 
 export default class Order extends PureComponent {
   static propTypes = {
@@ -21,11 +15,11 @@ export default class Order extends PureComponent {
     created: PropTypes.string.isRequired,
     updated: PropTypes.string.isRequired,
     waiter: PropTypes.string.isRequired, // TODO this will be a schema
-    items: PropTypes.any,
+    children: PropTypes.any,
   };
 
   static defaultProps = {
-    items: {}
+    children: {},
   }
 
   state = {};
@@ -46,7 +40,7 @@ export default class Order extends PureComponent {
         <div>waiter: {this.props.waiter}</div>
         <div>ready: {this.props.ready ? 'ready' : 'not ready'}</div>
         <List>
-          <OrderItems items={this.props.items} orderid={this.props.id} />
+          {this.props.children}
         </List>
         <Divider />
       </div>

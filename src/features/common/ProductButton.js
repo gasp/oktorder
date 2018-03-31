@@ -1,41 +1,39 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { ListItem } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import Button from 'material-ui/FlatButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
-const ProductButton = ({ add, rem, qty, stock }) => {
-  if (stock < 1) {
-    return <div>(depleted)</div>;
+export default class Product extends PureComponent {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    add: PropTypes.func.isRequired,
+    rem: PropTypes.func.isRequired,
+    qty: PropTypes.number,
+    stock: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  };
+
+  static defaultProps = {
+    qty: 0,
   }
 
-  function order(qty) {
-    if (qty < 1) {
-      return <button onClick={add}>+</button>;
+  state = {};
+
+  render() {
+    if (this.props.stock < 1) {
+      return <div>depleted</div>;
     }
     return (
-      <span>
-        <button disabled={qty < 1} onClick={rem}>-</button>
-        <span className="qty">{qty}</span>
-        <button onClick={add}>+</button>
-      </span>
+      <ListItem
+        key={this.props.id}
+        leftAvatar={<Avatar icon={<ContentAdd />} />}
+        primaryText={this.props.name}
+        secondaryText={`${this.props.qty} × ${this.props.price / 100} €`}
+        rightIconButton={<Button icon={<ContentAdd />} />}
+      />
     );
   }
-
-  return (
-    <span className="order-button">
-      {order(qty)}
-    </span>
-  );
-};
-
-ProductButton.propTypes = {
-  qty: PropTypes.number,
-  stock: PropTypes.number,
-  add: PropTypes.func.isRequired,
-  rem: PropTypes.func.isRequired,
-};
-
-ProductButton.defaultProps = {
-  qty: 0,
-  stock: 0,
-};
-
-export default ProductButton;
+}
