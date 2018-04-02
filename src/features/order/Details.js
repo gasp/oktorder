@@ -7,10 +7,9 @@ import { Link } from 'react-router-dom';
 import * as actions from './redux/actions';
 
 import Order from './Order';
-import Product from '../common/ProductButton';
+import Product from '../common/Product';
 
 const ProductName = ({ productid, products }) => {
-  console.log('prodictname products', products)
   if (typeof products === 'undefined') return `id(undefined) ${productid}`;
   if (typeof products[productid] === 'undefined') return `id ${productid}`;
   return `name ${products[productid].name}`;
@@ -20,6 +19,7 @@ const ProductName = ({ productid, products }) => {
 const OrderItems = ({ orderid, items, products }) => (Object.keys(items).map(i => (
   <Product
     id={`product_${i}${orderid}-${items[i].productid}`}
+    productId={items[i].productid}
     key={`item_${i}${orderid}-${items[i].productid}`}
     name={ProductName({ productid: items[i].productid, products })}
     qty={items[i].qty}
@@ -51,7 +51,6 @@ export class Details extends Component {
       return (<div>loading...</div>);
     }
     const orderItems = this.props.order.orders[orderId].items;
-    console.log('products',this.props.menu.products);
     return (
       <div className="order-details">
         <p style={{ margin: '1em' }}><Link to="/order/">&lt; back</Link></p>

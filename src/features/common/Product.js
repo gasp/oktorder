@@ -8,6 +8,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 export default class Product extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
+    productId: PropTypes.string.isRequired,
     add: PropTypes.func.isRequired,
     rem: PropTypes.func.isRequired,
     qty: PropTypes.number,
@@ -26,9 +27,12 @@ export default class Product extends PureComponent {
     if (this.props.stock < 1) {
       return <div>depleted</div>;
     }
+    this.props.add();
+    this.props.rem();
     return (
       <ListItem
         key={this.props.id}
+        productid={this.props.productId}
         leftAvatar={<Avatar icon={<ContentAdd />} />}
         primaryText={this.props.name}
         secondaryText={`${this.props.qty} × ${this.props.price / 100} €`}
