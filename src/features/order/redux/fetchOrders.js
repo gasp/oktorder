@@ -1,4 +1,4 @@
-// import _ from 'lodash';
+import _ from 'lodash';
 import axios from 'axios';
 
 import { couch } from '../../../common/config';
@@ -17,7 +17,6 @@ export function fetchOrders(args = {}) {
     dispatch({
       type: ORDER_FETCH_ORDERS_BEGIN,
     });
-    console.log(args);
 
     const url = `${couch.order}/_view/my?tag="Nina"`; // FIXME: Nina  + " = %22 ?
     return new Promise((resolve, reject) => {
@@ -50,6 +49,12 @@ export function dismissFetchOrdersError() {
   };
 }
 
+export function formatOrder(rows) {
+  const flattened = rows.map(r => ({ id: r.id, ...r.value }));
+  const mapped = _.mapKeys(flattened, 'id');
+  return mapped;
+}
+
 export function reducer(state, action) {
   switch (action.type) {
     case ORDER_FETCH_ORDERS_BEGIN:
@@ -62,10 +67,18 @@ export function reducer(state, action) {
 
     case ORDER_FETCH_ORDERS_SUCCESS:
       // The request is success
+      if (action.data.data && action.data.data.rows) {
+        return {
+          ...state,
+          fetchOrdersPending: false,
+          fetchOrdersError: null,
+          orders: { ...state.orders, ...formatOrder(action.data.data.rows) }
+        };
+      }
       return {
         ...state,
         fetchOrdersPending: false,
-        fetchOrdersError: null,
+        fetchOrdersError: 'there was no action.data.data.rows',
       };
 
     case ORDER_FETCH_ORDERS_FAILURE:

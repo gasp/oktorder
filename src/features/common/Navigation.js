@@ -6,14 +6,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import FontIcon from 'material-ui/FontIcon';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
+import IconList from 'material-ui/svg-icons/action/list';
+import IconPaste from 'material-ui/svg-icons/content/content-paste';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
+// import IconPayment from 'material-ui/svg-icons/action/payment';
 
-const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
-const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
-const nearbyIcon = <IconLocationOn />;
+const tablesIcon = <IconLocationOn />;
+const menuIcon = <IconList />;
+const orderIcon = <IconPaste />;
+
 
 export default class Navigation extends PureComponent {
   static propTypes = {
@@ -31,7 +34,7 @@ export default class Navigation extends PureComponent {
 
   select = (index) => {
     this.setState({ selectedIndex: index });
-    this.props.go(['/', 'menu', 'orders'][index]);
+    this.props.go(['/', '/menu', '/order'][index]);
   }
 
   render() {
@@ -41,19 +44,19 @@ export default class Navigation extends PureComponent {
           {/* icon is a map */}
           <BottomNavigationItem
             label="Tables"
-            icon={recentsIcon}
+            icon={tablesIcon}
             onClick={() => this.select(0)}
           />
           {/* icon is a beer */}
           <BottomNavigationItem
             label="Menu"
-            icon={favoritesIcon}
+            icon={menuIcon}
             onClick={() => this.select(1)}
           />
           {/* icon is un plateau avec un verre et une assiette */}
           <BottomNavigationItem
             label="Orders"
-            icon={nearbyIcon}
+            icon={orderIcon}
             onClick={() => this.select(2)}
           />
         </BottomNavigation>

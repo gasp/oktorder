@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import AppBar from '../common/AppBar';
 import * as actions from './redux/actions';
 
+import Order from './Order';
+
 export class Current extends Component {
   static propTypes = {
     order: PropTypes.object.isRequired,
@@ -34,9 +36,12 @@ export class Current extends Component {
         <AppBar />
         {_.map(this.props.order.orders, (order) => {
           console.log(order);
-          return <div>value</div>;
+          return <Order {...order} key={order.id} />;
         })}
-        Page Content: order/Current
+
+        <div>
+          that is all, do you want to view closed orders ?
+        </div>
       </div>
     );
   }

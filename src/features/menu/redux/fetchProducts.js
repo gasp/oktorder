@@ -63,9 +63,6 @@ export function dismissFetchProductsError() {
 export function formatProduct(rows) {
   const flattened = rows.map(r => ({ id: r.id, ...r.value }));
   const mapped = _.mapKeys(flattened, 'id');
-
-  console.log('%c here is the magic', 'color: pink');
-  // console.log(rows, mapped);
   return mapped;
 }
 
@@ -82,12 +79,19 @@ export function reducer(state, action) {
     case MENU_FETCH_PRODUCTS_SUCCESS:
       // The request is success
       // //, ..._.mapKeys(action.payload.data, 'id') },
+      if (action.data.data && action.data.data.rows) {
+        return {
+          ...state,
+          fetchProductsPending: false,
+          fetchProductsError: null,
+          // products: { ...state.products },
+          products: { ...state.products, ...formatProduct(action.data.data.rows) },
+        };
+      }
       return {
         ...state,
         fetchProductsPending: false,
-        fetchProductsError: null,
-        // products: { ...state.products },
-        products: { ...state.products, ...formatProduct(action.data.data.rows) },
+        fetchProductsError: 'there was no action.data.data.rows',
       };
 
     case MENU_FETCH_PRODUCTS_FAILURE:

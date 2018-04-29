@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import ProductButton from 'src/common/atoms/ProductButton';
+import ProductButton from 'src/features/common/ProductButton';
 
-describe('components/atom/ProductButton', () => {
+describe('components/ProductButton', () => {
   it('renders node with correct dom structure', () => {
     const routes = [{
       childRoutes: [
@@ -20,7 +20,7 @@ describe('components/atom/ProductButton', () => {
       ],
     }];
     const comp = shallow(
-      <SimpleNav routes={routes} />
+      <ProductButton routes={routes} />
     );
 
     expect(
